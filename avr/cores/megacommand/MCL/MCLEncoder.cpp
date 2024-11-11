@@ -5,7 +5,11 @@ int MCLEncoder::update(encoder_t *enc) {
   int inc = 0;
   if (enc) {
     inc = update_rotations(enc);
+#ifdef INVERT_ENCODER
+    inc = inc - (fastmode ? 4 * enc->button : enc->button);
+#else
     inc = inc + (fastmode ? 4 * enc->button : enc->button);
+#endif
   }
   cur = limit_value(cur, inc, min, max);
   return cur;

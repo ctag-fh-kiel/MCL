@@ -89,13 +89,21 @@ int Encoder::update_rotations(encoder_t *enc) {
     }
     amount--;
   }
+#ifdef INVERT_ENCODER
+  inc = -inc;
+#endif
  return inc;
 }
 
 int Encoder::update(encoder_t *enc) {
   int inc = update_rotations(enc);
 
+#ifdef INVERT_ENCODER
+  inc = inc - (fastmode ? 4 * enc->button : enc->button);
+#else
   inc = inc + (fastmode ? 4 * enc->button : enc->button);
+#endif
+
   cur += inc;
 
   return cur;

@@ -7,6 +7,8 @@
 #include "helpers.h"
 #include <inttypes.h>
 
+#define INVERT_ENCODER 1
+
 /**
  * \addtogroup GUI
  *
